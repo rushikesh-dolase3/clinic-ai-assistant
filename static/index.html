@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clinic Appointment System</title>
+</head>
+<body>
+
+<h2>Book Appointment</h2>
+
+<input id="name" placeholder="Patient Name"><br><br>
+<input id="phone" placeholder="Phone"><br><br>
+<input id="date" type="date"><br><br>
+<input id="time" type="time"><br><br>
+
+<button onclick="book()">Book</button>
+
+<h2>Appointments</h2>
+<button onclick="loadAppointments()">Refresh List</button>
+
+<ul id="list"></ul>
+
+<script>
+const API = "http://127.0.0.1:8000";
+
+function book() {
+    fetch(API + "/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            patient_name: name.value,
+            phone: phone.value,
+            date: date.value,
+            time: time.value
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(JSON.stringify(data));
+        loadAppointments();
+    });
+}
+
+function loadAppointments() {
+    fetch(API + "/appointments")
+    .then(res => res.json())
+    .then(data => {
+        let list = document.getElementById("list");
+        list.innerHTML = "";
+        data.forEach(a => {
+            list.innerHTML += `
+                <li>
+                    ${a.id} - ${a.patient_name} - ${a.date} ${a.time}
+                    <button onclick="deleteAppt(${a.id})">Delete</button>
+                </li>
+            `;
+        });
+    });
+}
+
+function deleteAppt(id) {
+    fetch(API + "/appointments/" + id, {
+        method: "DELETE"
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.status);
+        loadAppointments();
+    });
+}
+</script>
+
+</body>
+</html>
