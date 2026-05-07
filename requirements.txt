@@ -1,5 +1,6 @@
 fastapi
-unicorn
-python-dbtenv
+uvicorn
 sqlalchemy
-openai
+python-multipart
+itsdangerous
+jinja2
