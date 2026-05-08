@@ -37,9 +37,148 @@ def reply(message: str):
 # -----------------------------
 # Home
 # -----------------------------
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 def home():
-    return {"message": "Clinic AI Running 🚀"}
+    return """
+    <html>
+    <head>
+        <title>Clinic AI Assistant</title>
+
+        <style>
+
+        body{
+            margin:0;
+            font-family:Arial;
+            background:#f4f6f9;
+        }
+
+        .hero{
+            background:linear-gradient(135deg,#667eea,#764ba2);
+            color:white;
+            padding:80px 20px;
+            text-align:center;
+        }
+
+        .hero h1{
+            font-size:50px;
+            margin-bottom:10px;
+        }
+
+        .hero p{
+            font-size:20px;
+        }
+
+        .container{
+            padding:40px;
+            max-width:1000px;
+            margin:auto;
+        }
+
+        .card{
+            background:white;
+            padding:25px;
+            border-radius:12px;
+            margin-bottom:20px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+
+        ul{
+            line-height:2;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:12px 20px;
+            background:#667eea;
+            color:white;
+            text-decoration:none;
+            border-radius:8px;
+            margin-top:10px;
+        }
+
+        .footer{
+            text-align:center;
+            padding:20px;
+            color:#777;
+        }
+
+        </style>
+    </head>
+
+    <body>
+
+        <div class="hero">
+            <h1>Clinic AI Assistant</h1>
+
+            <p>
+            AI Powered WhatsApp Appointment Booking System
+            </p>
+
+            <a href="/admin" class="btn">
+            Open Admin Dashboard
+            </a>
+        </div>
+
+        <div class="container">
+
+            <div class="card">
+                <h2>📌 About Project</h2>
+
+                <p>
+                This project is a WhatsApp based clinic appointment
+                booking system developed using FastAPI and Twilio API.
+                Patients can book appointments directly through WhatsApp,
+                while doctors can manage appointments from the dashboard.
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>🚀 Features</h2>
+
+                <ul>
+                    <li>WhatsApp Appointment Booking</li>
+                    <li>Admin Dashboard</li>
+                    <li>Delete Appointments</li>
+                    <li>Duplicate Slot Protection</li>
+                    <li>Date Validation</li>
+                    <li>Live Cloud Deployment</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>⚙️ Tech Stack</h2>
+
+                <ul>
+                    <li>Python</li>
+                    <li>FastAPI</li>
+                    <li>SQLite</li>
+                    <li>Twilio WhatsApp API</li>
+                    <li>HTML/CSS/JavaScript</li>
+                    <li>Render Deployment</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>📱 How WhatsApp Booking Works</h2>
+
+                <ol>
+                    <li>User sends "hi" on WhatsApp</li>
+                    <li>Bot asks appointment details</li>
+                    <li>User selects doctor and time slot</li>
+                    <li>Appointment gets stored in database</li>
+                    <li>Doctor can manage appointments from dashboard</li>
+                </ol>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            Developed by Rushikesh 🚀
+        </div>
+
+    </body>
+    </html>
+    """
 
 
 # -----------------------------
